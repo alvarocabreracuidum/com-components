@@ -3,6 +3,14 @@ import { SizeSelector } from './components/SizeSelector';
 import { ColorSelector } from './components/ColorSelector';
 import './App.css';
 
+const colorMap: Record<string, string> = {
+  "Rojo": "red",
+  "Verde": "green",
+  "Azul": "blue",
+  "Amarillo": "yellow",
+  "Negro": "black"
+};
+
 function App() {
   const [currentSize, setCurrentSize] = useState("none");
   const [currentColor, setCurrentColor] = useState("none");
@@ -14,11 +22,26 @@ function App() {
         selectedSize={currentSize}
         onSizeChange={setCurrentSize}
       />
-      <h1 style={{ marginTop: "20px" }}>Color seleccionado: { currentColor }</h1>
-      <ColorSelector 
-        selectedColor={currentColor}
-        onColorChange={setCurrentColor}
-      />
+      <div style={{ marginTop: "20px" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h1 style={{ marginRight: "10px" }}>Color seleccionado:</h1>
+          { currentColor !== "none" && (
+            <div 
+              style={{
+                backgroundColor: colorMap[currentColor],
+                width: "50px",
+                height: "50px",
+                border: "1px solid #ccc",
+                borderRadius: "5px"
+              }}
+            />
+          )}
+        </div>
+        <ColorSelector 
+          selectedColor={currentColor}
+          onColorChange={setCurrentColor}
+        />
+      </div>
     </div>
   );
 }
